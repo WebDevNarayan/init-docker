@@ -1,0 +1,7 @@
+version: "3.8"
+name: "docker-init"
+services:
+  my-app:
+    ports:
+      - 8080:8080
+    build: .

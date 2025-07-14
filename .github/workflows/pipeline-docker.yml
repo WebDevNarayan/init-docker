@@ -1,0 +1,27 @@
+name: Build and Run Java App with Docker
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 📥 Checkout Code
+        uses: actions/checkout@v3
+
+      - name: 🐳 Set up Docker
+        uses: docker/setup-buildx-action@v3
+
+      - name: 🏗️ Build Docker Image
+        run: docker build -t my-java-app .
+
+      - name: 🧪 Run Docker Container (Optional)
+        run: |
+          docker run -d -p 8080:8080 --name my-running-app my-java-app
+          sleep 10
+          docker logs my-running-app
